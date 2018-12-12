@@ -1,0 +1,61 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		// mavenCentral()
+		// SRES Block
+		maven {
+			url "https://sres.web.boeing.com/artifactory/Maven-Snapshots"
+			credentials {
+				username mavenUsername
+				password mavenPassword
+			}
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.galvanize'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	// mavenCentral()
+	// SRES Block
+	maven {
+		url "https://sres.web.boeing.com/artifactory/Maven-Snapshots"
+		credentials {
+			username mavenUsername
+			password mavenPassword
+		}
+	}
+}
+
+
+dependencies {
+	runtime('mysql:mysql-connector-java:8.0.11')
+
+
+	compile group: 'com.microsoft.sqlserver', name: 'sqljdbc4', version: '4.0'
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('javax.xml.bind:jaxb-api:2.3.0')
+	compile('org.flywaydb:flyway-core:5.2.0')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'org.fluentlenium:fluentlenium-core:3.4.1'
+	testCompile 'org.fluentlenium:fluentlenium-junit:3.4.1'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.5.3'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.5.3'
+	testCompile('org.seleniumhq.selenium:selenium-remote-driver:3.5.3')
+	testCompile('org.seleniumhq.selenium:selenium-api:3.5.3')
+	testCompile "org.seleniumhq.selenium:htmlunit-driver:2.27"
+}
