@@ -30,9 +30,11 @@ public class PersonService {
 
     public Person editPerson(Person person, int id) {
         String firstName = person.getFirstName().trim();
-        if (!firstName.equals("")) {
+        String lastName = person.getLastName().trim();
+        if (!firstName.equals("") && !lastName.equals("")) {
             Person savedPerson = personRepository.findOneById(id);
             savedPerson.setFirstName(firstName);
+            savedPerson.setLastName(lastName);
             return(personRepository.save(savedPerson));
         } else {
             return new Person(-1);

@@ -2,6 +2,8 @@
 
 # dependencies
 client/node_modules
+.gradle/
+gradle/
 
 # testing
 /coverage

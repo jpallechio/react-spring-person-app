@@ -20,9 +20,8 @@ export default class App extends Component {
 
     showList = async () => {
         let body = await fetch('/api/person')
-        console.log("The body is: ", body)
         let people = await body.json();
-        console.log("The people are: ", people)
+    
         this.setState(
             {
                 people, selectedView: 'PersonList'
@@ -39,11 +38,8 @@ export default class App extends Component {
     };
 
     onSave = async (updatedPerson) => {
-        console.log("The updated person is: ", this.state.selectedPerson);
-        console.log("new person info ", updatedPerson)
         let updatedId = updatedPerson.id;
         updatedPerson = JSON.stringify(updatedPerson);
-        //console.log("Updated person id is: ", updatedId)
         var response = await fetch('/api/person/' + this.state.selectedPerson.id, {
             headers: {
                 'Accept': 'application/json',
@@ -56,7 +52,8 @@ export default class App extends Component {
     };
 
     onDelete = async (deletedPerson) => {
-        var response = await fetch('/api/person/' + deletedPerson.id,
+        console.log("deleted person is", deletedPerson)
+        /*var response = */await fetch('/api/person/' + deletedPerson.id,
             {
                 method: "DELETE"
             })
